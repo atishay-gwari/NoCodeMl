@@ -1,0 +1,28 @@
+{% extends './common/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Upload CSV</h5>
+                </div>
+                <div class="card-body">
+                    <p>The CSV file you are uploading should have the target column as the last column in the CSV.</p>
+                    <p>Check the box if you want the dataset to be visible to all.</p>
+                    <form action="" method="POST" style="max-width: 400px;" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {{ form|crispy }}
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

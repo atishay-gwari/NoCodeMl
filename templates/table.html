@@ -1,0 +1,73 @@
+{% extends './common/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Files Info</p>
+        </div>
+        <div class="card-body">
+            <div class="col">
+                <div class="col-md">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title">Public Data</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if public.count == 0 %}
+                            <p class="card-text"><b>No Data Present!</b></p>
+                            {% else %}
+                            {% for i in public %}
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="/data/dataset/{{i.file}}" target="_blank">
+                                            <i class="fas fa-file"></i>
+                                            {{i.file}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card mb">
+                        <div class="card-header">
+                            <h5 class="card-title">Private Data</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if upload.count == 0  %}
+                            <p class="card-text"><b>No Data Present!</b></p>
+                            {% else %}
+                            {% for i in upload %}
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="/data/dataset/{{i.file}}" target="_blank">
+                                            <i class="fas fa-file"></i>
+                                            {{i.file}}
+                                        </a>
+                    
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <a href="{% url 'update' i.id %}"><button type="button" class="btn btn-outline-warning me-2">Update</button></a>
+                                            <a href="#"><button type="button" class="btn btn-outline-primary me-2">Use</button></a>
+                                            <a href="{% url 'delete' i.id %}"><button type="button" class="btn btn-outline-danger">Delete</button></a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
